@@ -1,10 +1,10 @@
-export const fetchFromAPI = async () => {
+export const fetchProductsFromAPI = async () => {
     const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/recommendations/`,
+        `${process.env.REACT_APP_API_URL}/recommendations/products`,
         {
             headers: {
                 'Content-Type': 'application/json',
-                Accept: 'application/json',
+                Authorization: `${process.env.REACT_APP_API_AUTH_KEY}`,
             },
         }
     )
