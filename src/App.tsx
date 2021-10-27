@@ -23,15 +23,15 @@ function App() {
                         <Nav className="me-auto">
                             <Nav.Link href="#home">Home</Nav.Link>
                             <Nav.Link href="#products">Products</Nav.Link>
+                            <Nav.Link href="#categories">Categories</Nav.Link>
                             <Nav.Link href="#products/edit">
                                 Edit Products
                             </Nav.Link>
-                            <Nav.Link href="#products/new">
-                                New Product
-                            </Nav.Link>
-                            <Nav.Link href="#categories">Categories</Nav.Link>
                             <Nav.Link href="#categories/edit">
                                 Edit Categories
+                            </Nav.Link>
+                            <Nav.Link href="#products/new">
+                                New Product
                             </Nav.Link>
                             <Nav.Link href="#categories/new">
                                 New Category
