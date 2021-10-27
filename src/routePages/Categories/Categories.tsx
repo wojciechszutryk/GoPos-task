@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import { Container } from 'react-bootstrap'
 import { useStyles } from './styles'
-import { fetchCategoriesFromAPI, fetchProductsFromAPI } from '../../data/fetch'
+import { fetchCategoriesFromAPI } from '../../data/fetch'
 import { useQuery } from 'react-query'
 import { ClipLoader } from 'react-spinners'
 

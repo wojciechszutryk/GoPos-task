@@ -20,3 +20,82 @@ export const fetchCategoriesFromAPI = async () => {
     )
     return await response.json()
 }
+
+export const updateCategory = async ({
+    id,
+    name,
+}: {
+    id: string
+    name: string
+}) => {
+    const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/product_categories/${id}`,
+        {
+            method: 'PUT',
+            body: JSON.stringify({
+                id: id,
+                name: name,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${process.env.REACT_APP_API_AUTH_KEY}`,
+            },
+        }
+    )
+    return await response.json()
+}
+
+export const updateProduct = async (
+    id: string,
+    name: string,
+    category_id: string
+) => {
+    const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/products/${id}`,
+        {
+            method: 'PUT',
+            body: JSON.stringify({
+                id: id,
+                name: name,
+                category_id: category_id,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${process.env.REACT_APP_API_AUTH_KEY}`,
+            },
+        }
+    )
+    return await response.json()
+}
+
+export const createCategory = async (name: string) => {
+    const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/product_categories/`,
+        {
+            method: 'POST',
+            body: JSON.stringify({
+                name: name,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${process.env.REACT_APP_API_AUTH_KEY}`,
+            },
+        }
+    )
+    return await response.json()
+}
+
+export const createProduct = async (name: string, category_id: string) => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/products/`, {
+        method: 'POST',
+        body: JSON.stringify({
+            name: name,
+            category_id: category_id,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${process.env.REACT_APP_API_AUTH_KEY}`,
+        },
+    })
+    return await response.json()
+}
