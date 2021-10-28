@@ -26,9 +26,9 @@ import {
 import { Container } from 'react-bootstrap'
 import { useStyles } from './styles'
 import {
-    fetchCategoriesFromAPI,
-    fetchProductsFromAPI,
+    fetchProductsWithCategoryFromAPI,
     updateProduct,
+    fetchCategoriesFromAPI
 } from '../../data/fetch'
 import { ClipLoader } from 'react-spinners'
 
@@ -39,29 +39,30 @@ const EditProducts = () => {
         { category_id: string; name: string; id: string }[]
     >([])
     const [productsData, setProductsData] = React.useState<
-        { category_id: string; name: string; id: string }[]
+        { category: string; name: string; id: string }[]
     >([])
     const [CategoriesList, setCategoriesList] = React.useState<
         { id: string; name: string }[]
     >([])
     const { isLoading: isLoadingProducts, error: errorProducts } = useQuery(
         'productsEdit',
-        fetchProductsFromAPI,
+        fetchProductsWithCategoryFromAPI,
         {
             onSuccess: (data) => {
                 setProductsData([])
-                setNewProductsData((newProductsData) => [
-                    ...newProductsData,
-                    { category_id: '', name: '', id: '' },
-                ])
+                setNewProductsData([])
                 data.data.forEach((prod: any) => {
                     setProductsData((productsData) => [
                         ...productsData,
                         {
                             name: prod.name,
-                            category_id: prod.category_id,
+                            category: prod.category.name,
                             id: prod.id,
                         },
+                    ])
+                    setNewProductsData((newProductsData) => [
+                        ...newProductsData,
+                        { category_id: '', name: '', id: prod.id },
                     ])
                 })
             },
@@ -123,7 +124,7 @@ const EditProducts = () => {
     )
 
     const handleNewCategoryChange = React.useCallback(
-        (index: number, event: SelectChangeEvent<number>) => {
+        (index: number, event: SelectChangeEvent<string>) => {
             const newCategoryId = event.target.value
             const newProductsDataCopy = [...newProductsData]
             newProductsDataCopy[index].category_id = newCategoryId.toString()
@@ -132,19 +133,13 @@ const EditProducts = () => {
         [newProductsData]
     )
 
-    console.log(productsData)
-    console.log(CategoriesList)
-
     const rows: { [key: string]: ReactNode }[] = useMemo(() => {
-        return productsData.map(({ name, category_id, id }, index) => {
+        return productsData.map(({ name, category, id }, index) => {
             return {
                 name: <Typography>{name}</Typography>,
                 category: (
                     <Typography>
-                        {CategoriesList.find((cat) => {
-                            console.log(cat.name)
-                            return cat.id == category_id
-                        })?.name ?? category_id}
+                        {category}
                     </Typography>
                 ),
                 newName: (
@@ -161,17 +156,18 @@ const EditProducts = () => {
                     <FormControl>
                         <InputLabel id="new_category">new Category</InputLabel>
                         <Select
+                            sx={{
+                                width: 300,
+                            }}
                             labelId="new_category_label"
                             id="new_category_select"
-                            value={1}
+                            value={newProductsData[index]?.category_id ?? null}
                             label="new category"
                             onChange={(event) =>
                                 handleNewCategoryChange(index, event)
                             }
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            {CategoriesList.map(cat => <MenuItem value={cat.id}>{cat.name}</MenuItem>)}
                         </Select>
                     </FormControl>
                 ),
@@ -201,6 +197,7 @@ const EditProducts = () => {
         productsData,
         handleSetNewProductName,
         editProductMutation,
+        handleNewCategoryChange,
     ])
 
     if (isLoadingProducts || isLoadingCategories)
