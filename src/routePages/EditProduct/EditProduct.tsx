@@ -167,7 +167,7 @@ const EditProducts = () => {
                                 handleNewCategoryChange(index, event)
                             }
                         >
-                            {CategoriesList.map(cat => <MenuItem value={cat.id}>{cat.name}</MenuItem>)}
+                            {CategoriesList.map(cat => <MenuItem key={cat.id} value={cat.id}>{cat.name}</MenuItem>)}
                         </Select>
                     </FormControl>
                 ),

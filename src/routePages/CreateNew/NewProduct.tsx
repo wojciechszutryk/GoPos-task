@@ -13,7 +13,7 @@ import {
 import { Container } from 'react-bootstrap'
 import { MutationFunction, useMutation, useQuery } from 'react-query'
 import { ClipLoader } from 'react-spinners'
-import { createCategory, createProduct, fetchCategoriesFromAPI } from '../../data/fetch'
+import {  createProduct, fetchCategoriesFromAPI } from '../../data/fetch'
 import { useStyles } from './styles'
 
 const NewProduct = () => {
@@ -104,7 +104,7 @@ const NewProduct = () => {
                         handleCategoryChange(event)
                     }
                 >
-                    {allCategories.map(cat => <MenuItem value={cat.id}>{cat.name}</MenuItem>)}
+                    {allCategories.map(cat => <MenuItem key={cat.id} value={cat.id}>{cat.name}</MenuItem>)}
                 </Select>
             </FormControl>
             <Button
