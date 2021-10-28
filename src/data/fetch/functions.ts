@@ -100,12 +100,17 @@ export const createCategory = async ({ name }: {name: string}) => {
     return await response.json()
 }
 
-export const createProduct = async (name: string, category_id: string) => {
+export const createProduct = async ({name,category_id}:{ name: string, category_id: string }) => {
+    console.log(name, category_id)
     const response = await fetch(`${process.env.REACT_APP_API_URL}/products/`, {
         method: 'POST',
         body: JSON.stringify({
             name: name,
             category_id: category_id,
+            type: "BASIC",
+            measure_type: "ITEM",
+            status: "ENABLED",
+            tax_id: 1
         }),
         headers: {
             'Content-Type': 'application/json',

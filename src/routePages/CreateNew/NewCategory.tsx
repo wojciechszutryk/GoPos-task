@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { MutationFunction, useMutation } from 'react-query'
 import { createCategory } from '../../data/fetch'
+import { useStyles } from './styles'
 
 const NewCategory = () => {
+    const classes = useStyles()
     const [newCategoryName, setNewCategoryName] =useState('')
     const newCategoryMutation = useMutation(
         createCategory as MutationFunction,
@@ -28,7 +30,7 @@ const NewCategory = () => {
         []
     )
     return (
-        <Box>
+        <Box className={classes.center}>
             <Typography variant={'body1'} align={'center'} gutterBottom>
                 New Category
             </Typography>

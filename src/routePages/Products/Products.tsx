@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import { Container } from 'react-bootstrap'
 import { useStyles } from './styles'
-import { fetchCategoriesFromAPI, fetchProductsFromAPI } from '../../data/fetch'
+import { fetchProductsWithCategoryFromAPI } from '../../data/fetch'
 import { useQuery } from 'react-query'
 import { ClipLoader } from 'react-spinners'
 
@@ -21,41 +21,21 @@ const Products = () => {
     const [ProductList, setProductList] = React.useState<
         {
             name: string
-            categoryId: string
+            categoryId: string,
+            categoryName: string
         }[]
     >([])
-    const [CategoriesList, setCategoriesList] = React.useState<
-        { id: string; name: string }[]
-    >([])
-    const { isLoading: isLoadingCategories, error: errorCategories } = useQuery(
-        'categories',
-        fetchCategoriesFromAPI,
-        {
-            onSuccess: (data) => {
-                setCategoriesList([])
-                data.data.forEach((cat: any) => {
-                    const category = {
-                        id: cat.id,
-                        name: cat.name,
-                    }
-                    setCategoriesList((CategoriesList) => [
-                        ...CategoriesList,
-                        category,
-                    ])
-                })
-            },
-        }
-    )
     const { isLoading: isLoadingProducts, error: errorProducts } = useQuery(
         'products',
-        fetchProductsFromAPI,
+        fetchProductsWithCategoryFromAPI,
         {
             onSuccess: (data) => {
                 setProductList([])
                 data.data.forEach((prod: any) => {
                     const product = {
                         name: prod.name,
-                        categoryId: prod.category_id,
+                        categoryId: prod.category.id,
+                        categoryName: prod.category.name
                     }
                     setProductList((ProductList) => [...ProductList, product])
                 })
@@ -72,20 +52,17 @@ const Products = () => {
 
     const rows: { [key: string]: null | string }[] = useMemo(() => {
         return ProductList.map((prod, index) => {
-            const categoryName =
-                CategoriesList?.find((cat) => cat.id === prod.categoryId)
-                    ?.name ?? null
-            return { name: prod.name, category: categoryName }
+            return { name: prod.name, category: prod.categoryName,  }
         })
-    }, [ProductList, CategoriesList])
+    }, [ProductList])
 
-    if (isLoadingCategories || isLoadingProducts)
+    if (isLoadingProducts)
         return (
             <Container className={classes.center}>
                 <ClipLoader size={150} />
             </Container>
         )
-    if (errorCategories || errorProducts)
+    if (errorProducts)
         return <Box>An error has occurred</Box>
 
     return (
