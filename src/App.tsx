@@ -3,12 +3,10 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {
-    Categories,
+    Categories, CreateNew,
     EditCategory,
     EditProduct,
     Home,
-    NewCategory,
-    NewProduct,
     Products,
 } from './routePages'
 
@@ -30,11 +28,8 @@ function App() {
                             <Nav.Link href="#categories/edit">
                                 Edit Categories
                             </Nav.Link>
-                            <Nav.Link href="#products/new">
-                                New Product
-                            </Nav.Link>
-                            <Nav.Link href="#categories/new">
-                                New Category
+                            <Nav.Link href="#new">
+                                Create new
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
@@ -54,11 +49,10 @@ function App() {
                         path="/categories/edit"
                         component={EditCategory}
                     />
-                    <Route exact path="/products/new" component={NewProduct} />
                     <Route
                         exact
-                        path="/categories/new"
-                        component={NewCategory}
+                        path="/new"
+                        component={CreateNew}
                     />
                     <Route path="/" component={Home} />
                 </Switch>

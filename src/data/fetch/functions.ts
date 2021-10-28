@@ -83,9 +83,9 @@ export const updateProduct = async ({id, name, category_id}:
     return await response.json()
 }
 
-export const createCategory = async (name: string) => {
+export const createCategory = async ({ name }: {name: string}) => {
     const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/product_categories/`,
+        `${process.env.REACT_APP_API_URL}/product_categories`,
         {
             method: 'POST',
             body: JSON.stringify({
