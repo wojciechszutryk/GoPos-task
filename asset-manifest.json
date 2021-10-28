@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/GoPos-task/static/css/main.2ae47eeb.chunk.css",
+    "main.js": "/GoPos-task/static/js/main.0c1405fe.chunk.js",
+    "main.js.map": "/GoPos-task/static/js/main.0c1405fe.chunk.js.map",
+    "runtime-main.js": "/GoPos-task/static/js/runtime-main.40e8c1e0.js",
+    "runtime-main.js.map": "/GoPos-task/static/js/runtime-main.40e8c1e0.js.map",
+    "static/css/2.0a9ec390.chunk.css": "/GoPos-task/static/css/2.0a9ec390.chunk.css",
+    "static/js/2.15305449.chunk.js": "/GoPos-task/static/js/2.15305449.chunk.js",
+    "static/js/2.15305449.chunk.js.map": "/GoPos-task/static/js/2.15305449.chunk.js.map",
+    "static/js/3.8cc48817.chunk.js": "/GoPos-task/static/js/3.8cc48817.chunk.js",
+    "static/js/3.8cc48817.chunk.js.map": "/GoPos-task/static/js/3.8cc48817.chunk.js.map",
+    "index.html": "/GoPos-task/index.html",
+    "static/css/2.0a9ec390.chunk.css.map": "/GoPos-task/static/css/2.0a9ec390.chunk.css.map",
+    "static/css/main.2ae47eeb.chunk.css.map": "/GoPos-task/static/css/main.2ae47eeb.chunk.css.map",
+    "static/js/2.15305449.chunk.js.LICENSE.txt": "/GoPos-task/static/js/2.15305449.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.40e8c1e0.js",
+    "static/css/2.0a9ec390.chunk.css",
+    "static/js/2.15305449.chunk.js",
+    "static/css/main.2ae47eeb.chunk.css",
+    "static/js/main.0c1405fe.chunk.js"
+  ]
+}
